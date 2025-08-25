@@ -1,2 +1,2 @@
 # JavaSuper
-Sem III Java Assignment
+Sem III Java Project
