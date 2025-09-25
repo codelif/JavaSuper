@@ -31,7 +31,7 @@ class Product {
   String description;
   ArrayList<Review> reviews = new ArrayList<>();
 
-  public Product(int a, String n, int p, int r, int q, String d) {
+  public Product(int a, String n, int r, int p, int q, String d) {
     ASIN = a;
     name = n;
     ratings = r;
@@ -49,9 +49,9 @@ class Product {
     c = sc.nextLine();
     System.out.println("Enter Ratings:");
     r = sc.nextInt();
+    sc.nextLine();
     System.out.println("Enter Review:");
     rv = sc.nextLine();
-
     reviews.add(new Review(c, r, rv));
   }
 
@@ -119,8 +119,6 @@ class Product {
     if (!d.isEmpty()) {
       description = d;
     }
-
-    sc.close();
   }
 }
 
@@ -208,7 +206,6 @@ class Seller extends Person {
     String d = sc.nextLine();
 
     product_inventory.add(new Product(a, n, r, p, q, d));
-
   }
 
   public void showInventory() {
@@ -237,6 +234,7 @@ class Seller extends Person {
       for (int i = 0; i < product_inventory.size(); i++) {
         if (a == product_inventory.get(i).asinNum()) {
           product_inventory.get(i).displayDeets();
+          break;
         }
       }
     } catch (NullPointerException e) {
@@ -248,6 +246,7 @@ class Seller extends Person {
       for (int i = 0; i < product_inventory.size(); i++) {
         if (a == product_inventory.get(i).asinNum()) {
           product_inventory.get(i).updateDeets();
+          break;
         }
       }
     } catch (NullPointerException e) {
@@ -302,17 +301,18 @@ public class init {
     // read as empty
     // because of trailing newlines after nextInt(). We're just smoke-testing the
     // method here.
+    // --- Seller.addProduct (hardcoded System.in) ---
     String addInputs = String.join("\n",
         "444", // ASIN (int)
-        "", // name will be empty due to nextLine() after nextInt()
+        "Mouse X", // name
         "5", // ratings (int)
         "1499", // price (int)
         "12", // qty (int)
-        "" // description ends up empty due to nextLine() after nextInt()
-    );
+        "" // description (empty line)
+    ) + "\n"; // <-- ensure there's an actual final line
+
     System.setIn(new ByteArrayInputStream(addInputs.getBytes()));
-    s.addProduct(); // adds a third product with ASIN 444
-    s.showInventory();
+    s.addProduct();
 
     // --- Seller.deleteFromInventory (also uses Product.asinNum) ---
     s.deleteFromInventory(111); // remove p1 by ASIN
