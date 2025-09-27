@@ -257,71 +257,81 @@ class Seller extends Person {
 
 public class init {
   public static void main(String[] args) {
-    // --- People (also exercises Person.displayDeets) ---
-    Seller s = new Seller("Alice Seller", "alice@shop.com", 9876543210L, "123 Market St");
-    Customer c = new Customer("Carl Customer", "carl@mail.com", 9123456780L, "45 River Rd");
-    s.displayDeets();
-    c.displayDeets();
-
-    // --- Products + Reviews (displayDeets, asinNum, Review.DisplayReview) ---
-    Product p1 = new Product(111, "Keyboard", 4, 1999, 10, "Compact mechanical keyboard");
-    Product p2 = new Product(222, "Mouse", 5, 999, 25, "Wireless mouse");
-    Review r1 = new Review("Bob", 5, "Great build quality!");
-    p1.displayDeets();
-    p2.displayDeets();
-
-    // --- Seller inventory (showInventory, showSingleProduct) ---
-    s.product_inventory.add(p1);
-    s.product_inventory.add(p2);
-    s.showInventory();
-    s.showSingleProduct(222);
-
-    // --- Customer cart (addToCart, showCart, deleteFromCart) ---
-    c.addToCart(p1);
-    c.addToCart(p2);
-    c.showCart();
-    c.deleteFromCart(111);
-    c.showCart();
-
-    // --- Product.updateDeets via Seller.updateProduct (hardcoded System.in) ---
-    // This updates product with ASIN 222
-    String updateInputs = String.join("\n",
-        "333", // new ASIN
-        "Mouse Pro", // new name
-        "4", // ratings
-        "1299", // price
-        "30", // qty
-        "Upgraded sensor"); // description
-    System.setIn(new ByteArrayInputStream(updateInputs.getBytes()));
-    s.updateProduct(222); // calls Product.updateDeets() internally
-    s.showSingleProduct(333); // ASIN changed from 222 -> 333 above
-
-    // --- Seller.addProduct (hardcoded System.in) ---
-    // NOTE: addProduct mixes nextInt() and nextLine(), so name/description will
-    // read as empty
-    // because of trailing newlines after nextInt(). We're just smoke-testing the
-    // method here.
-    // --- Seller.addProduct (hardcoded System.in) ---
-    String addInputs = String.join("\n",
-        "444", // ASIN (int)
-        "Mouse X", // name
-        "5", // ratings (int)
-        "1499", // price (int)
-        "12", // qty (int)
-        "" // description (empty line)
-    ) + "\n"; // <-- ensure there's an actual final line
-
-    System.setIn(new ByteArrayInputStream(addInputs.getBytes()));
-    s.addProduct();
-
-    // --- Seller.deleteFromInventory (also uses Product.asinNum) ---
-    s.deleteFromInventory(111); // remove p1 by ASIN
-    s.showInventory();
-
-    // Done: every method is exercised at least once:
-    // Person.displayDeets, Product.displayDeets, Product.asinNum,
-    // Product.updateDeets,
-    // Review.DisplayReview, Customer.addToCart/showCart/deleteFromCart,
+    getimg imgGetter = new getimg();
+    try {
+      imgGetter.getImages("cats");
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+    // // --- People (also exercises Person.displayDeets) ---
+    // Seller s = new Seller("Alice Seller", "alice@shop.com", 9876543210L, "123
+    // Market St");
+    // Customer c = new Customer("Carl Customer", "carl@mail.com", 9123456780L, "45
+    // River Rd");
+    // s.displayDeets();
+    // c.displayDeets();
+    //
+    // // --- Products + Reviews (displayDeets, asinNum, Review.DisplayReview) ---
+    // Product p1 = new Product(111, "Keyboard", 4, 1999, 10, "Compact mechanical
+    // keyboard");
+    // Product p2 = new Product(222, "Mouse", 5, 999, 25, "Wireless mouse");
+    // Review r1 = new Review("Bob", 5, "Great build quality!");
+    // p1.displayDeets();
+    // p2.displayDeets();
+    //
+    // // --- Seller inventory (showInventory, showSingleProduct) ---
+    // s.product_inventory.add(p1);
+    // s.product_inventory.add(p2);
+    // s.showInventory();
+    // s.showSingleProduct(222);
+    //
+    // // --- Customer cart (addToCart, showCart, deleteFromCart) ---
+    // c.addToCart(p1);
+    // c.addToCart(p2);
+    // c.showCart();
+    // c.deleteFromCart(111);
+    // c.showCart();
+    //
+    // // --- Product.updateDeets via Seller.updateProduct (hardcoded System.in) ---
+    // // This updates product with ASIN 222
+    // String updateInputs = String.join("\n",
+    // "333", // new ASIN
+    // "Mouse Pro", // new name
+    // "4", // ratings
+    // "1299", // price
+    // "30", // qty
+    // "Upgraded sensor"); // description
+    // System.setIn(new ByteArrayInputStream(updateInputs.getBytes()));
+    // s.updateProduct(222); // calls Product.updateDeets() internally
+    // s.showSingleProduct(333); // ASIN changed from 222 -> 333 above
+    //
+    // // --- Seller.addProduct (hardcoded System.in) ---
+    // // NOTE: addProduct mixes nextInt() and nextLine(), so name/description will
+    // // read as empty
+    // // because of trailing newlines after nextInt(). We're just smoke-testing the
+    // // method here.
+    // // --- Seller.addProduct (hardcoded System.in) ---
+    // String addInputs = String.join("\n",
+    // "444", // ASIN (int)
+    // "Mouse X", // name
+    // "5", // ratings (int)
+    // "1499", // price (int)
+    // "12", // qty (int)
+    // "" // description (empty line)
+    // ) + "\n"; // <-- ensure there's an actual final line
+    //
+    // System.setIn(new ByteArrayInputStream(addInputs.getBytes()));
+    // s.addProduct();
+    //
+    // // --- Seller.deleteFromInventory (also uses Product.asinNum) ---
+    // s.deleteFromInventory(111); // remove p1 by ASIN
+    // s.showInventory();
+    //
+    // // Done: every method is exercised at least once:
+    // // Person.displayDeets, Product.displayDeets, Product.asinNum,
+    // // Product.updateDeets,
+    // // Review.DisplayReview, Customer.addToCart/showCart/deleteFromCart,
+    // //
     // Seller.addProduct/showInventory/deleteFromInventory/showSingleProduct/updateProduct.
   }
 }
